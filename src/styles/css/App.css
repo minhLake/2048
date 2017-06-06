@@ -1,0 +1,77 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #faf8ef;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+.stage .block-sec {
+  width: 465px;
+  height: 465px;
+  margin: 150px auto;
+  background-color: #bbada0;
+  cursor: default;
+  border-radius: 6px;
+  box-size: border-box;
+  -moz-box-sizing: border-box;
+  /* Firefox */
+  -webkit-box-sizing: border-box;
+  /* Safari */
+  position: relative;
+}
+.stage .block-sec .block {
+  width: 97.5px;
+  height: 97.5px;
+  position: absolute;
+  margin: 15px;
+  background: #cdc1b4;
+  border-radius: 3px;
+  font-size: 53px;
+  line-height: 97.5px;
+  text-align: center;
+  font-weight: 600;
+}
+.stage .block-sec .block-2 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-4 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-8 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-16 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-32 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-64 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-128 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-256 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-512 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-1024 {
+  background-color: #ede0c8;
+  color: #776e65;
+}
+.stage .block-sec .block-2048 {
+  background-color: #ede0c8;
+  color: #776e65;
+}

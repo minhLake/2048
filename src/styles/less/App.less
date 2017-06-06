@@ -1,0 +1,87 @@
+@stageW: 450px;
+@stageH: 450px;
+@blockMarginW: 15px;
+@blockFontSize: 53px;
+
+html,body {
+	margin: 0;
+	padding: 0;
+	background-color: #faf8ef;
+	font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.stage {
+	.block-sec {
+		width: @stageW + @blockMarginW;
+		height: @stageH + @blockMarginW;
+		margin: 150px auto;
+		background-color: #bbada0;
+		cursor: default;
+		border-radius: 6px;
+
+		box-size: border-box;
+		-moz-box-sizing:border-box; /* Firefox */
+		-webkit-box-sizing:border-box; /* Safari */
+
+		position: relative;
+
+		.block{
+			width: @stageW / 4 - @blockMarginW;
+			height: @stageH / 4 - @blockMarginW;
+			position: absolute;
+			margin: @blockMarginW;
+			background: #cdc1b4;
+			border-radius: 3px;
+
+			font-size: @blockFontSize;
+			line-height: @stageH / 4 - @blockMarginW;
+			text-align: center;
+			font-weight: 600;
+
+			&-2{
+				background-color:#eee4da;
+				color: #776e65;
+			}
+			&-4{
+				background-color:#eee4da + ;
+				color: #776e65;
+			}
+			&-8{
+				background-color:#eee4da + ;
+				color: #776e65;
+			}
+			&-16{
+				background-color:#eee4da + ;
+				color: #776e65;
+			}
+			&-32{
+				background-color:#eee4da;
+				color: #776e65;
+			}
+			&-64{
+				background-color:#eee4da;
+				color: #776e65;
+			}
+			&-128{
+				background-color:#eee4da;
+				color: #776e65;
+			}
+			&-256{
+				background-color:#eee4da;
+				color: #776e65;
+			}
+			&-512{
+				background-color:#eee4da;
+				color: #776e65;
+			}
+			&-1024{
+				background-color:#ede0c8;
+				color: #776e65;
+			}			
+			&-2048{
+				background-color:#ede0c8;
+				color: #776e65;
+			}
+		}
+	}
+}
