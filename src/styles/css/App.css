@@ -31,11 +31,35 @@ body {
   text-align: center;
   font-weight: 600;
 }
-.stage .block-sec .block-2 {
+.stage .block-sec .block-0 {
   background-color: #eee4da;
   color: #776e65;
 }
+.stage .block-sec .block-1 {
+  background-color: #ede0c8;
+  color: #776e65;
+}
+.stage .block-sec .block-2 {
+  background-color: #f2b179;
+  color: #f9f6f2;
+}
+.stage .block-sec .block-3 {
+  background-color: #f59563;
+  color: #f9f6f2;
+}
 .stage .block-sec .block-4 {
+  background-color: #f67c5f;
+  color: #f9f6f2;
+}
+.stage .block-sec .block-5 {
+  background-color: #f65e3b;
+  color: #f9f6f2;
+}
+.stage .block-sec .block-6 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.stage .block-sec .block-7 {
   background-color: #eee4da;
   color: #776e65;
 }
@@ -43,35 +67,11 @@ body {
   background-color: #eee4da;
   color: #776e65;
 }
-.stage .block-sec .block-16 {
-  background-color: #eee4da;
-  color: #776e65;
-}
-.stage .block-sec .block-32 {
-  background-color: #eee4da;
-  color: #776e65;
-}
-.stage .block-sec .block-64 {
-  background-color: #eee4da;
-  color: #776e65;
-}
-.stage .block-sec .block-128 {
-  background-color: #eee4da;
-  color: #776e65;
-}
-.stage .block-sec .block-256 {
-  background-color: #eee4da;
-  color: #776e65;
-}
-.stage .block-sec .block-512 {
-  background-color: #eee4da;
-  color: #776e65;
-}
-.stage .block-sec .block-1024 {
+.stage .block-sec .block-9 {
   background-color: #ede0c8;
   color: #776e65;
 }
-.stage .block-sec .block-2048 {
+.stage .block-sec .block-10 {
   background-color: #ede0c8;
   color: #776e65;
 }
