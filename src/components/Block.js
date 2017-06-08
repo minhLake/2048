@@ -9,14 +9,14 @@ class Block extends React.Component {
 		}
 		let showContent = null;
 		if(this.props.data.content !== 0) {
-			showContent = this.props.data.content;
+			showContent = Config.content[this.props.data.content - 1];
 		}else{
 			showContent = '';
 		}
 
 		let blockClass = 'block';
 		Config.content.forEach((value,index) => {
-			if(value === this.props.data.content) {
+			if(index === this.props.data.content-1) {
 				blockClass += ' block-' + index;
 			}
 		})

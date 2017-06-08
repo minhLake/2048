@@ -12,6 +12,7 @@ class AppComponent extends React.Component {
 		super(props);
 		this.state = {
 			arrange : Tools.initArrange()
+			// arrange : [0,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0]
 		};
 	}
 
@@ -24,22 +25,19 @@ class AppComponent extends React.Component {
 		    e = e || event;　　　
 		    currKey = e.keyCode || e.which || e.charCode;　　　　
 		    keyName = String.fromCharCode(currKey);
+		    // let newArrange = Tools.getNewArrange(this.state.arrange , keyName);
 
-		    switch(keyName) {
-		    	case 'W':
-		    		// alert(Tools.transform2Arr(this.state.arrange));
-		    		console.log(Tools.transform2Arr(this.state.arrange));
-		    		break;
-		    	case 'S':
-		    		
-		    		break;		    	
-		    	case 'A':
-		    		
-		    		break;		    	
-		    	case 'D':
-		    		
-		    		break;
-		    }
+	    	let gameStart = setInterval(()=>{
+	    		let newArrange = Tools.getNewArrange(this.state.arrange , keyName);
+		    	if(newArrange){
+			    	this.setState({arrange:newArrange});
+		    	}else{
+
+		    		this.setState({arrange:Tools.initArrange(this.state.arrange)});
+		    		clearInterval(gameStart);
+		    	}
+	    	},50);
+	    	let gameOver = '';
 		}
 
 

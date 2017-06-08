@@ -29,91 +29,201 @@ const getBlockPos = (index) => {
 	}
 }
 
-const getBlocksRange = () => {
+const initArrange = (arrange = Config.initMap) => {
+	let blank = ((arrange)=>{
+		let count = 0;
+		let blankIdxs = [];
 
-};
-
-const BlockNumberHandle = (()=>{
-	let i = 3;
-	return ()=>{
-
-		if(i >= 2) i -- ;
-		return i;
-	}
-})();
-
-const initBlockRange = (range=[]) => {
-	let Nmbers = range;
-	let Nmber = null;
-	let isRandom = true;
-	return () => {
-		if(Nmbers.length !== 0){
-			do{
-				isRandom = true;
-				Nmber = Math.floor(Math.random() * 16);		
-				Nmbers.forEach((value) => {
-					if(value === Nmber) isRandom = false;
-				});
-			}while(!isRandom)
-		}else{
-			Nmber = Math.floor(Math.random() * 16);
-		}
-		return Nmber;
-	}
-};
-
-const randomContent = (() => {
-
-	let targetBlock = [];
-	for(let idx = 0,initBlockNumber = BlockNumberHandle(); idx < initBlockNumber ; idx ++) {
-		targetBlock.push(initBlockRange()())
-	}
-
-	return (index) => {
-		let getContent = null;
-		targetBlock.forEach((value,idx) => {
-			if(value === index){
-				getContent = Math.random() > 0.25 ? Config.content[0] : Config.content[1];
+		arrange.forEach((value,index) => {
+			if(value === 0){
+				blankIdxs[count] = index;
+				count ++;
 			}
 		});
-		return getContent
-	}
-})();
 
-const initArrange = () => {
-	let arrange = [];
-	for (let i = 0 ; i < 16 ; i ++){
-		arrange.push(randomContent(i));
+		let obj = {
+			count: count,
+			blankIdxs: blankIdxs
+		}
+		return obj;
+	})(arrange);
+
+	if(blank.count === 0){
+		return arrange;
 	}
-	return arrange;
+	else{
+		let Rdm = null;
+		let RdmIsOk = null;
+		let limit = arrange !== Config.initMap ? 1 : 2;
+
+		for(let i = 0 ; i < limit ; i ++) {
+			do{
+
+				Rdm = Math.floor(Math.random() * 16);
+				if(arrange[Rdm] === 0) {
+					RdmIsOk = true;
+				}else{
+					RdmIsOk = false;
+				}
+				
+			}while (!RdmIsOk)
+
+			arrange.forEach((value,idx)=>{
+				if(idx === Rdm && value === 0){
+					arrange[idx] = Math.random() > 0.25 ? 1 : 2;
+				}
+			});
+		}
+
+		return arrange;
+	}
+
 };
 
-const transform2Arr = (arrange) => {
+const transform2Arr = (arrange,type) => {
+	let newArrange = [];
 	let count = 0;
-	let arrange2Arr = [];
 		
-	for (let iy = 0 ; iy < 4 ; iy ++ ){
-		arrange2Arr[iy] = [];
-		for (let ix = 0 ; ix < 4 ; ix ++){
-			if(arrange[count] === null){
-				arrange[count] = 0;
+	for(let i = 0 ; i < 4 ; i ++){
+		newArrange[i] = [];
+		for(let multiple = 0, gap = 4; multiple < 4; multiple ++) {
+			if(type == 'TransposeMatrix') {
+				if(arrange[i + gap * multiple] === null){
+					arrange[i + gap * multiple] = 0;
+				}
+				newArrange[i][multiple] = arrange[i + gap * multiple];
 			}
-			arrange2Arr[iy][ix] = arrange[count];
-			count ++ ;
+			else if(type == 'Matrix') {
+				if(arrange[count] === null){
+					arrange[count] = 0;
+				}
+				newArrange[i][multiple] = arrange[count];
+				count ++;
+			}
 		}
+		
 	}
 
-	return arrange2Arr;
+	return newArrange;
+};
+
+const revertArr = (arrange, type = 1) => {
+	let count = 0;
+	let arrangeArr = [];
+		
+	for (let iy = 0 ; iy < 4 ; iy ++ ){
+		for (let ix = 0 ; ix < 4 ; ix ++){
+
+			if(type === 1){
+
+				arrangeArr[count] = arrange[iy][ix];
+				count ++ ;
+
+			}
+			else if(type === -1){
+				arrangeArr[count] = arrange[ix][iy];
+				count ++ ;
+			}
+		}
+	}
+	return arrangeArr;
+};
+
+const calculateArrange = (matrix , type) => {
+	let contaner = null;
+	let isStop = true;
+	for(let iy = 0 ; iy < 4 ; iy ++){
+		for(let ix = 0 ; ix < 4 ; ix ++){
+			if(type === 'Left'){
+				if(ix !== 3){
+
+					if(matrix[iy][ix] === 0 && matrix[iy][ix + 1] !== 0){
+						matrix[iy][ix] = matrix[iy][ix + 1];
+						matrix[iy][ix + 1] = 0;
+						isStop=false;
+					}
+					if(matrix[iy][ix] !== 0 && matrix[iy][ix] === matrix[iy][ix + 1]){
+						matrix[iy][ix] = matrix[iy][ix] + 1;
+						matrix[iy][ix + 1] = 0;
+						isStop=false;
+					}
+				
+				}else if(ix === 3){
+
+				}
+				
+			}else if(type === 'Right'){
+				if(ix !== 3){
+					if(matrix[iy][3 - ix] === 0 && matrix[iy][3- ix - 1 ] !== 0){
+						matrix[iy][3 - ix] = matrix[iy][3 - ix - 1];
+						matrix[iy][3 - ix - 1] = 0;
+						isStop=false;
+					}
+					else if(matrix[iy][3 - ix] !== 0 && matrix[iy][3 - ix] === matrix[iy][3 - ix - 1]){
+						matrix[iy][3 - ix] = matrix[iy][3 - ix] + 1;
+						matrix[iy][3 - ix - 1] = 0;
+						isStop=false;
+					}
+				
+				}else if(ix === 3){
+
+				}
+				
+			}
+		}
+	}
+	if(isStop === true){
+		return false;
+	}
+	else {
+		return matrix;
+	}
+};
+
+const getNewArrange = (arrange, type) => {
+	let newArrange = new Array();
+	switch(type) {
+		case 'W':
+			newArrange = transform2Arr(arrange , 'TransposeMatrix');
+			newArrange = calculateArrange(newArrange, 'Left');
+			if(newArrange) {return revertArr(newArrange,-1);}
+			else {return false;}
+			break;
+		case 'S':
+			newArrange = transform2Arr(arrange , 'TransposeMatrix');
+			newArrange = calculateArrange(newArrange, 'Right');
+			if(newArrange) {return revertArr(newArrange,-1);}
+			else {return false;}
+			break;
+		case 'A':
+			newArrange = transform2Arr(arrange, 'Matrix');
+			newArrange = calculateArrange(newArrange, 'Left');
+			if(newArrange) {return revertArr(newArrange);}
+			else {return false;}
+			break;
+		case 'D':
+			newArrange = transform2Arr(arrange, 'Matrix');
+			newArrange = calculateArrange(newArrange, 'Right');
+			if(newArrange) {return revertArr(newArrange);}
+			else {return false;}
+			break;
+		default: return 0;
+	}
+
+	// return newArrange;
+};
+const sleep =(numberMillis) => { 
+	var now = new Date(); 
+	var exitTime = now.getTime() + numberMillis; 
+	while (true) { 
+		now = new Date(); 
+		if (now.getTime() > exitTime) 
+		return; 
+	} 
 }
-
-const calculateArrange = (arrange2Arr, type) => {
-
-}
-
 export default {
 	getBlockPos,
 	initArrange,
-	transform2Arr,
-	transform2Arr,
-	calculateArrange
+	getNewArrange,
+	sleep
 }

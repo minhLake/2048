@@ -37,7 +37,10 @@ html,body {
 			line-height: @stageH / 4 - @blockMarginW;
 			text-align: center;
 			font-weight: 600;
-
+			transition: background .2s ease-in-out ;
+			-moz-transition: background .2s ease-in-out ; /* Firefox 4 */
+			-webkit-transition: background .2s ease-in-out ; /* Safari 和 Chrome */
+			-o-transition: background .2s ease-in-out ; /* Opera */ 
 			&-0{
 				background-color:#eee4da;
 				color: #776e65;
