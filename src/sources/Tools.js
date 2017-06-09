@@ -220,10 +220,29 @@ const sleep =(numberMillis) => {
 		if (now.getTime() > exitTime) 
 		return; 
 	} 
+};
+
+const isGameOver = (testArrange) => {
+	let isGameOver = [];
+	let i = 0;
+	const direction = ['W','S','A','D'];
+	direction.forEach((value,index) => {
+		if(!getNewArrange(testArrange, value)){
+			isGameOver[i] = true;
+			i++;
+		}
+	});
+	if (isGameOver.length === 4) {
+		return true;
+	}else{
+		return false;
+	}
 }
+
 export default {
 	getBlockPos,
 	initArrange,
 	getNewArrange,
-	sleep
+	sleep,
+	isGameOver
 }

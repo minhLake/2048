@@ -34,12 +34,14 @@ class AppComponent extends React.Component {
 		    	}else{
 
 		    		this.setState({arrange:Tools.initArrange(this.state.arrange)});
+			    	if(Tools.isGameOver(this.state.arrange)){
+			    		alert('game over!');
+			    		document.location.reload();
+			    	}
 		    		clearInterval(gameStart);
 		    	}
 	    	},50);
-	    	let gameOver = '';
 		}
-
 
 	}
 
