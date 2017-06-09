@@ -207,7 +207,7 @@ const getNewArrange = (arrange, type) => {
 			if(newArrange) {return revertArr(newArrange);}
 			else {return false;}
 			break;
-		default: return 0;
+		default: return false;
 	}
 
 	// return newArrange;

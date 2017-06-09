@@ -26,21 +26,31 @@ class AppComponent extends React.Component {
 		    currKey = e.keyCode || e.which || e.charCode;　　　　
 		    keyName = String.fromCharCode(currKey);
 		    // let newArrange = Tools.getNewArrange(this.state.arrange , keyName);
+		    switch(keyName) {
+		    	case 'W':
+		    	case 'S':
+		    	case 'A':
+		    	case 'D': 
 
-	    	let gameStart = setInterval(()=>{
-	    		let newArrange = Tools.getNewArrange(this.state.arrange , keyName);
-		    	if(newArrange){
-			    	this.setState({arrange:newArrange});
-		    	}else{
+			    	let gameStart = setInterval(()=>{
+			    		let newArrange = Tools.getNewArrange(this.state.arrange , keyName);
+				    	if(newArrange){
+					    	this.setState({arrange:newArrange});
+				    	}else{
 
-		    		this.setState({arrange:Tools.initArrange(this.state.arrange)});
-			    	if(Tools.isGameOver(this.state.arrange)){
-			    		alert('game over!');
-			    		document.location.reload();
-			    	}
-		    		clearInterval(gameStart);
-		    	}
-	    	},50);
+				    		this.setState({arrange:Tools.initArrange(this.state.arrange)});
+					    	if(Tools.isGameOver(this.state.arrange)){
+					    		alert('game over!');
+					    		document.location.reload();
+					    	}
+				    		clearInterval(gameStart);
+				    	}
+			    	},50);
+			    	
+		    	break;
+		    	default: break;
+		    }
+
 		}
 
 	}
