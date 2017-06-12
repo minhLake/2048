@@ -43,6 +43,10 @@ class AppComponent extends React.Component {
 					    		alert('game over!');
 					    		document.location.reload();
 					    	}
+					    	if(Tools.isWin(this.state.arrange)){
+					    		alert('you win');
+					    		document.location.reload();
+					    	}
 				    		clearInterval(gameStart);
 				    	}
 			    	},50);

@@ -237,12 +237,23 @@ const isGameOver = (testArrange) => {
 	}else{
 		return false;
 	}
-}
+};
+
+const isWin = (testArrange) => {
+	let isWin = false;
+	direction.forEach((value,index) => {
+		if(value === 2048){
+			isWin = true;
+		}
+	});
+	return isWin;
+};
 
 export default {
 	getBlockPos,
 	initArrange,
 	getNewArrange,
 	sleep,
-	isGameOver
+	isGameOver,
+	isWin
 }
