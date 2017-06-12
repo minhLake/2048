@@ -6,25 +6,21 @@ const getBlockPos = (index) => {
 		case 2:
 		case 3:
 			return {top: 112.5 * 0 , left: 112.5 * index}
-			break;
 		case 4:
 		case 5:
 		case 6:
 		case 7:
 			return {top: 112.5 * 1 , left: 112.5 * (index % 4)}
-			break;
 		case 8:
 		case 9:
 		case 10:
 		case 11:
 			return {top: 112.5 * 2 , left: 112.5 * (index % 8)}
-			break;
 		case 12:
 		case 13:
 		case 14:
 		case 15:
 			return {top: 112.5 * 3 , left: 112.5 * (index % 12)}
-			break;
 		default:break;
 	}
 }
@@ -130,7 +126,6 @@ const revertArr = (arrange, type = 1) => {
 };
 
 const calculateArrange = (matrix , type) => {
-	let contaner = null;
 	let isStop = true;
 	for(let iy = 0 ; iy < 4 ; iy ++){
 		for(let ix = 0 ; ix < 4 ; ix ++){
@@ -188,45 +183,41 @@ const getNewArrange = (arrange, type) => {
 			newArrange = calculateArrange(newArrange, 'Left');
 			if(newArrange) {return revertArr(newArrange,-1);}
 			else {return false;}
-			break;
 		case 'S':
 			newArrange = transform2Arr(arrange , 'TransposeMatrix');
 			newArrange = calculateArrange(newArrange, 'Right');
 			if(newArrange) {return revertArr(newArrange,-1);}
 			else {return false;}
-			break;
 		case 'A':
 			newArrange = transform2Arr(arrange, 'Matrix');
 			newArrange = calculateArrange(newArrange, 'Left');
 			if(newArrange) {return revertArr(newArrange);}
 			else {return false;}
-			break;
 		case 'D':
 			newArrange = transform2Arr(arrange, 'Matrix');
 			newArrange = calculateArrange(newArrange, 'Right');
 			if(newArrange) {return revertArr(newArrange);}
 			else {return false;}
-			break;
 		default: return false;
 	}
 
 	// return newArrange;
 };
-const sleep =(numberMillis) => { 
-	var now = new Date(); 
-	var exitTime = now.getTime() + numberMillis; 
-	while (true) { 
-		now = new Date(); 
-		if (now.getTime() > exitTime) 
-		return; 
-	} 
+const sleep =(numberMillis) => {
+	var now = new Date();
+	var exitTime = now.getTime() + numberMillis;
+	while (true) {
+		now = new Date();
+		if (now.getTime() > exitTime)
+		return;
+	}
 };
 
 const isGameOver = (testArrange) => {
 	let isGameOver = [];
 	let i = 0;
 	const direction = ['W','S','A','D'];
-	direction.forEach((value,index) => {
+	direction.forEach((value) => {
 		if(!getNewArrange(testArrange, value)){
 			isGameOver[i] = true;
 			i++;
@@ -241,7 +232,7 @@ const isGameOver = (testArrange) => {
 
 const isWin = (testArrange) => {
 	let isWin = false;
-	testArrange.forEach((value,index) => {
+	testArrange.forEach((value) => {
 		if(value === 2048){
 			isWin = true;
 		}
