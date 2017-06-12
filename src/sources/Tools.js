@@ -241,7 +241,7 @@ const isGameOver = (testArrange) => {
 
 const isWin = (testArrange) => {
 	let isWin = false;
-	direction.forEach((value,index) => {
+	testArrange.forEach((value,index) => {
 		if(value === 2048){
 			isWin = true;
 		}
