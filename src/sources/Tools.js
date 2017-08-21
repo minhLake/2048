@@ -1,4 +1,5 @@
 import Config from './config.js';
+
 const getBlockPos = (index) => {
 	switch(index) {
 		case 0:
@@ -26,53 +27,27 @@ const getBlockPos = (index) => {
 }
 
 const initArrange = (arrange = Config.initMap) => {
-	let blank = ((arrange)=>{
-		let count = 0;
-		let blankIdxs = [];
 
-		arrange.forEach((value,index) => {
-			if(value === 0){
-				blankIdxs[count] = index;
-				count ++;
+		let Rdm = null,
+				RdmIsOk = null,
+				limit = arrange !== Config.initMap ? 1 : 2,
+				HoldOn = arrange.find((a)=>a===0)===0 ? true : false;
+		if(HoldOn){
+			for(let i = 0 ; i < limit ; i ++) {
+				do{
+					Rdm = Math.floor(Math.random() * 16);
+					if(arrange[Rdm] === 0) {
+						RdmIsOk = true;
+						arrange[Rdm] = Math.random() > 0.25 ? 1 : 2;
+					}else{
+						RdmIsOk = false;
+					}
+				}while (!RdmIsOk)
 			}
-		});
-
-		let obj = {
-			count: count,
-			blankIdxs: blankIdxs
-		}
-		return obj;
-	})(arrange);
-
-	if(blank.count === 0){
-		return arrange;
-	}
-	else{
-		let Rdm = null;
-		let RdmIsOk = null;
-		let limit = arrange !== Config.initMap ? 1 : 2;
-
-		for(let i = 0 ; i < limit ; i ++) {
-			do{
-
-				Rdm = Math.floor(Math.random() * 16);
-				if(arrange[Rdm] === 0) {
-					RdmIsOk = true;
-				}else{
-					RdmIsOk = false;
-				}
-				
-			}while (!RdmIsOk)
-
-			arrange.forEach((value,idx)=>{
-				if(idx === Rdm && value === 0){
-					arrange[idx] = Math.random() > 0.25 ? 1 : 2;
-				}
-			});
 		}
 
 		return arrange;
-	}
+	
 
 };
 
@@ -83,13 +58,13 @@ const transform2Arr = (arrange,type) => {
 	for(let i = 0 ; i < 4 ; i ++){
 		newArrange[i] = [];
 		for(let multiple = 0, gap = 4; multiple < 4; multiple ++) {
-			if(type == 'TransposeMatrix') {
+			if(type === 'TransposeMatrix') {
 				if(arrange[i + gap * multiple] === null){
 					arrange[i + gap * multiple] = 0;
 				}
 				newArrange[i][multiple] = arrange[i + gap * multiple];
 			}
-			else if(type == 'Matrix') {
+			else if(type === 'Matrix') {
 				if(arrange[count] === null){
 					arrange[count] = 0;
 				}
@@ -176,7 +151,7 @@ const calculateArrange = (matrix , type) => {
 };
 
 const getNewArrange = (arrange, type) => {
-	let newArrange = new Array();
+	let newArrange = [];
 	switch(type) {
 		case 'W':
 			newArrange = transform2Arr(arrange , 'TransposeMatrix');
@@ -203,14 +178,13 @@ const getNewArrange = (arrange, type) => {
 
 	// return newArrange;
 };
-const sleep =(numberMillis) => {
-	var now = new Date();
-	var exitTime = now.getTime() + numberMillis;
-	while (true) {
-		now = new Date();
-		if (now.getTime() > exitTime)
-		return;
-	}
+const sleep =(fn,time) => {
+  const timeout = (ms) => {
+  	return new Promise((resolve, reject) => {
+	  	setTimeout(resolve,ms);
+	  });
+  }
+  timeout(time).then(fn);
 };
 
 const isGameOver = (testArrange) => {
@@ -231,16 +205,12 @@ const isGameOver = (testArrange) => {
 };
 
 const isWin = (testArrange) => {
-	let isWin = false;
-	testArrange.forEach((value) => {
-		if(value === 2048){
-			isWin = true;
-		}
-	});
+	let isWin = testArrange.find((a)=>a===2048) === 2048 ? true : false;
+
 	return isWin;
 };
 
-export default {
+export {
 	getBlockPos,
 	initArrange,
 	getNewArrange,

@@ -1,0 +1,10 @@
+export const KEY_DOWN = 'KEY_DOWN';
+export const KEY_BOARD_UP = 'KEY_BOARD_UP';
+export const KEY_BOARD_DOWN = 'KEY_BOARD_DOWN';
+export const KEY_BOARD_LEFT = 'KEY_BOARD_LEFT';
+export const KEY_BOARD_RIGHT = 'KEY_BOARD_RIGHT';
+export const INIT_MAP = 'INIT_MAP';
+export const GAME_OVER = 'GAME_OVER';
+export const GAME_WINNING = 'GAME_WINNING';
+export const ON_RUN = 'ON_RUN';
+export const KEY_BOARD_ON = 'KEY_BOARD_ON';
