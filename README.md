@@ -1,5 +1,5 @@
 2048（PC版本）。
-[English version](https://github.com/minhLake/2048/blob/master/README-EN.md)
+[English version](https://github.com/minhLake/2048/blob/master/README_EN.md)
 
 ## 目录
 
