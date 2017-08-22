@@ -178,13 +178,13 @@ const getNewArrange = (arrange, type) => {
 
 	// return newArrange;
 };
-const sleep =(fn,time) => {
+const sleep =(fn,time,e) => {
   const timeout = (ms) => {
   	return new Promise((resolve, reject) => {
 	  	setTimeout(resolve,ms);
 	  });
   }
-  timeout(time).then(fn);
+  timeout(time).then(fn(e));
 };
 
 const isGameOver = (testArrange) => {
