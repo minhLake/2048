@@ -5,10 +5,13 @@ body {
   background-color: #faf8ef;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
+.stage {
+  padding-top: 150px;
+}
 .stage .block-sec {
   width: 465px;
   height: 465px;
-  margin: 150px auto;
+  margin: 0 auto;
   background-color: #bbada0;
   cursor: default;
   border-radius: 6px;

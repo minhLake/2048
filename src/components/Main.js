@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as Action from '../action/';
 import Block from './Block.js';
 import { getBlockPos, getNewArrange, isGameOver, isWin ,initArrange ,sleep } from '../sources/Tools.js';
+let _OnkeyUp = ()=>{}
 class AppComponent extends React.Component {
 
 	constructor(props) {
@@ -25,7 +26,7 @@ class AppComponent extends React.Component {
 			else if(keyArrMap.includes(keyName)) return keyArr[keyArrMap.findIndex((a)=>a===keyName)];
 			else return false;
 		}
-		document.onkeyup = (e) => {
+		_OnkeyUp = (e) => {
 				let arrang,
 						newArrange,
 						randomArr;
@@ -53,10 +54,15 @@ class AppComponent extends React.Component {
 			    },50);
 		 		}
 		}
+		document.body.addEventListener('keyup', _OnkeyUp, false);
+	}
+
+	componentWillUpdate(nextProps) {
+		if(!!nextProps.isRun.data&&nextProps.isRun.data!==this.props.isRun.data) {document.body.removeEventListener('keyup', _OnkeyUp, false);}
+		else if(!nextProps.isRun.data&&nextProps.isRun.data!==this.props.isRun.data){document.body.addEventListener('keyup', _OnkeyUp, false);}
 	}
 
   	render() {
-			console.log(this);
 			const Cont = this.props.keyboard.data ? this.props.keyboard.data : 0;
 	  	let Blocks = [];
 
